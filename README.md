@@ -19,9 +19,9 @@ The project is divided into three parts corresponding to the assignment requirem
 clinical-trials-data-pipeline/
 │
 ├── SampleDateExtract.xlsx
-├── part1.py
-├── part2.py
-├── part3b.py
+├── Part_1.py
+├── Part_2.py
+├── Part_3b.py
 │
 ├── clinical_trial_schema_output.xlsx
 ├── clinical_trial_success_analysis.xlsx
@@ -34,9 +34,9 @@ clinical-trials-data-pipeline/
 | File                                 | Description                                                                                 |
 | ------------------------------------ | ------------------------------------------------------------------------------------------- |
 | SampleDateExtract.xlsx               | Raw clinical trials dataset provided for the assignment                                     |
-| part1.py                             | Data ingestion, quality profiling, and schema normalization                                 |
-| part2.py                             | Success metric operationalisation and stratified cohort analysis                            |
-| part3b.py                            | Written response discussing limitations, additional data needs, and future schema evolution |
+| Part_1.py                             | Data ingestion, quality profiling, and schema normalization                                 |
+| Part_2.py                             | Success metric operationalisation and stratified cohort analysis                            |
+| Part_3b.py                            | Written response discussing limitations, additional data needs, and future schema evolution |
 | clinical_trial_schema_output.xlsx    | Output generated from Part 1                                                                |
 | clinical_trial_success_analysis.xlsx | Output generated from Part 2                                                                |
 
@@ -146,41 +146,6 @@ Tier 1 trials are excluded from success-rate denominators because their final ou
 clinical_trial_success_analysis.xlsx
 ```
 
----
-
-## Assumptions and Limitations
-
-* Trial completion does not imply therapeutic success.
-* Completed trials may still report negative or inconclusive results.
-* Recruitment status reflects operational progress rather than efficacy.
-* Ongoing trials are right-censored and therefore excluded from success-rate calculations.
-* Small subgroup analyses are flagged as low-sample-size groups.
-
----
-
-## Future Improvements
-
-A more robust success metric would require:
-
-* Primary endpoint outcomes
-* Objective response rates
-* Progression-free survival (PFS)
-* Overall survival (OS)
-* Adverse event information
-* Regulatory approval status
-* Trial result publications
-
-The schema could be expanded with dedicated tables for:
-
-* Trial outcomes
-* Regulatory milestones
-* Safety data
-* Publications
-* Biomarkers
-* Patient-level response metrics
-
----
-
 ## Requirements
 
 ### Python Version
@@ -202,7 +167,7 @@ pip install pandas numpy openpyxl
 ### Part 1
 
 ```bash
-python part1.py
+python Part_1.py
 ```
 
 Generates:
@@ -214,7 +179,7 @@ clinical_trial_schema_output.xlsx
 ### Part 2
 
 ```bash
-python part2.py
+python Part_2.py
 ```
 
 Generates:
