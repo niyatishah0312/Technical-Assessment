@@ -1,0 +1,94 @@
+How I defined success
+
+This dataset does not contain a direct success or failure flag. It mainly contains operational information about clinical trials such as trial status, phase, enrollment, and dates. It does not contain efficacy results, endpoint achievement, survival outcomes, or regulatory approvals.
+
+Because of this, I defined a success proxy using the trial status field.
+
+I classified trials as:
+
+- Success (Tier 2): Completed
+- Failure (Tier 0): Terminated or Withdrawn
+- Ambiguous / Ongoing (Tier 1): Recruiting, Not Yet Recruiting, Enrolling by Invitation, Suspended, Unknown
+
+For the binary success rate calculation:
+	Success = Completed
+	Failure = Terminated or Withdrawn
+	Ambiguous/Ongoing trials were excluded from the denominator because their final outcome is not yet known.
+
+
+
+How I handled ambiguous statuses
+
+Some statuses do not clearly indicate success or failure.
+For example:
+	- Recruiting and Not Yet Recruiting indicate that the trial is still ongoing.
+	- Enrolling by Invitation also represents an active study.
+	- Suspended means the trial has been paused but may restart later.
+	- Unknown does not provide enough information to determine the outcome.
+
+Since these trials have not reached a final state, I treated them as unresolved and excluded them from the success rate calculation.
+
+
+
+How phase was used
+
+Phase was not used to determine whether a trial was successful or unsuccessful.
+
+Instead, phase was used as a stratification variable to compare success rates across different stages of development (Phase 1, Phase 2, Phase 3, etc.).
+
+A completed Phase 1 trial and a completed Phase 3 trial were both considered successful according to the proxy definition.
+
+
+
+Trial completion vs therapeutic success
+
+A completed trial is not necessarily a therapeutically successful trial.
+
+A trial may complete successfully from an operational perspective but still fail to show meaningful clinical benefit.
+
+Therefore, the success metric used in this analysis should be interpreted as a measure of trial completion and progression, rather than a measure of drug efficacy or regulatory success.
+
+The proxy sits closer to the operational execution end of the spectrum and should not be interpreted as evidence that a therapy worked clinically.
+
+
+
+Additional data needed for a better success metric
+
+To build a more meaningful success metric, I would need outcome-related data such as:
+
+- Primary endpoint results
+	Whether the trial met its predefined primary endpoint.
+	Statistical significance (p-values, confidence intervals).
+- Clinical Efficacy Metrics
+	Progression-free survival (PFS)
+	Overall survival (OS)
+	Objective response rate (ORR)
+- Safety and toxicity data
+	Frequency and severity of adverse events.
+	Treatment discontinuation due to toxicity.
+- Regulatory approval status
+- Published trial results
+
+With these data elements, success could be defined using a hierarchical framework such as:
+	- Clinical Success: Primary endpoint achieved.
+	- Regulatory Success: Product receives regulatory approval.
+	- Commercial Success: Product reaches market adoption.
+
+
+
+How the schema would evolve
+
+The current schema mainly stores trial metadata and operational information.
+
+To support richer analysis, I would add separate tables for:
+
+A clinical outcomes table would store information such as primary and secondary endpoints, whether the endpoints were met, effect sizes, p-values, response rates, progression-free survival (PFS), and overall survival (OS). This would allow success to be evaluated based on clinical efficacy rather than trial completion alone.
+
+A safety table would capture adverse events, serious adverse events, toxicity grades, and treatment discontinuations. This would help assess whether a therapy is not only effective but also safe.
+
+A regulatory outcomes table would record submission and approval information from regulatory agencies such as the FDA or EMA. This would allow analysis of regulatory success rates and approval timelines.
+
+A publications/results table would store links to published trial results, conference presentations, and ClinicalTrials.gov results reporting. This would improve traceability and provide evidence supporting trial outcomes.
+
+This would allow the success metric to move from operational trial completion toward true clinical and regulatory success.
+
